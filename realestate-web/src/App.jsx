@@ -11,6 +11,7 @@ import Layout from './components/layout/Layout';
 import Home from './pages/Home';
 import About from './pages/About';
 import Projects from './pages/Projects';
+import Services from './pages/Services';
 import Testimonials from './pages/Testimonials';
 import FAQ from './pages/FAQ';
 import Contact from './pages/Contact';
@@ -44,6 +45,7 @@ const AuthenticatedApp = () => {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/projects" element={<Projects />} />
+        <Route path="/services" element={<Services />} />
         <Route path="/testimonials" element={<Testimonials />} />
         <Route path="/faq" element={<FAQ />} />
         <Route path="/contact" element={<Contact />} />

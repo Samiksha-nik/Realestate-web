@@ -2,14 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Phone } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import companyLogo from '@/assets/ananya_logo_enhanced 4x.png';
 
 const navLinks = [
   { label: 'Home', path: '/' },
   { label: 'About Us', path: '/about' },
   { label: 'Projects', path: '/projects' },
+  { label: 'Our Services', path: '/services' },
   { label: 'Testimonials', path: '/testimonials' },
   { label: 'FAQ', path: '/faq' },
-  { label: 'Contact', path: '/contact' },
+  { label: 'Contact Us', path: '/contact' },
 ];
 
 export default function Header({ onEnquire }) {
@@ -37,13 +39,13 @@ export default function Header({ onEnquire }) {
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="flex items-center justify-between h-20">
+          <div className="flex items-center justify-between h-28">
             {/* Logo */}
             <Link to="/" className="flex items-center gap-3 group">
               <img
-                src="https://media.base44.com/images/public/user_69eb92ed8599861a01a632b2/f64fdb319_image.png"
+                src={companyLogo}
                 alt="Ananya Realty Advisory LLP"
-                className="h-14 w-auto"
+                className="h-24 lg:h-28 w-auto"
               />
             </Link>
 
@@ -122,13 +124,17 @@ export default function Header({ onEnquire }) {
                   </Link>
                 </motion.div>
               ))}
-              <Link
-                to="/contact"
+              <button
+                type="button"
+                onClick={() => {
+                  setMobileOpen(false);
+                  if (typeof onEnquire === 'function') onEnquire();
+                }}
                 className="mt-6 flex items-center justify-center gap-2 px-6 py-3 bg-primary text-primary-foreground font-semibold rounded-full"
               >
                 <Phone className="w-4 h-4" />
                 Enquire Now
-              </Link>
+              </button>
             </nav>
           </motion.div>
         )}

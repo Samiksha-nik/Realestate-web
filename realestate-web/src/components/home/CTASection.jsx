@@ -1,11 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 
 const INTERIOR_IMG = 'https://media.base44.com/images/public/69ec59b100bb0a337662905c/73a173d2e_generated_8e2ae378.png';
 
-export default function CTASection() {
+export default function CTASection({ onConsultation }) {
   return (
     <section className="relative py-24 lg:py-32 overflow-hidden">
       <div className="absolute inset-0">
@@ -28,13 +27,14 @@ export default function CTASection() {
           <p className="mt-6 text-muted-foreground text-lg max-w-xl mx-auto">
             Let our experts guide you to the perfect home that matches your lifestyle and aspirations.
           </p>
-          <Link
-            to="/contact"
+          <button
+            type="button"
+            onClick={() => (typeof onConsultation === 'function' ? onConsultation() : null)}
             className="mt-8 inline-flex items-center gap-2 px-10 py-4 bg-primary text-primary-foreground font-semibold rounded-full hover:bg-primary/90 transition-all duration-300 hover:shadow-xl hover:shadow-primary/20"
           >
             Schedule a Consultation
             <ArrowRight className="w-4 h-4" />
-          </Link>
+          </button>
         </motion.div>
       </div>
     </section>

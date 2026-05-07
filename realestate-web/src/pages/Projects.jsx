@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link } from 'react-router-dom';
 import { ArrowUpRight, MapPin } from 'lucide-react';
 import EnquiryModal from '@/components/shared/EnquiryModal';
 
 const HERO_IMG = 'https://media.base44.com/images/public/69ec59b100bb0a337662905c/a52620973_generated_4b691570.png';
 
-const categories = ['All', 'Luxury Apartments', 'Villas', 'Penthouses', 'Townships'];
+const categories = ['All', 'Luxury Apartments'];
 
 const projects = [
   {
@@ -15,41 +14,6 @@ const projects = [
     category: 'Luxury Apartments',
     desc: 'An iconic 40-storey tower offering panoramic sea views, world-class amenities, and bespoke interiors for the discerning homeowner.',
     image: 'https://media.base44.com/images/public/69ec59b100bb0a337662905c/65bb22552_generated_45c4d000.png',
-  },
-  {
-    title: 'Emerald Heights',
-    location: 'Powai, Mumbai',
-    category: 'Villas',
-    desc: 'A gated community of 50 premium villas surrounded by lush greenery, private gardens, and a lifestyle of unparalleled serenity.',
-    image: 'https://media.base44.com/images/public/69ec59b100bb0a337662905c/cfcb23023_generated_fa6dcbcc.png',
-  },
-  {
-    title: 'Azure Skyline',
-    location: 'Worli, Mumbai',
-    category: 'Penthouses',
-    desc: 'Ultra-luxury penthouses with infinity pools, private elevators, and breathtaking views of the Arabian Sea.',
-    image: 'https://media.base44.com/images/public/69ec59b100bb0a337662905c/1f849f377_generated_7e85046c.png',
-  },
-  {
-    title: 'Celestial Gardens',
-    location: 'Thane, Mumbai',
-    category: 'Townships',
-    desc: 'A sprawling 100-acre integrated township featuring residences, retail, schools, and recreational facilities.',
-    image: 'https://media.base44.com/images/public/69ec59b100bb0a337662905c/e9f08b53c_generated_ada4b49c.png',
-  },
-  {
-    title: 'The Crest Residences',
-    location: 'Juhu, Mumbai',
-    category: 'Luxury Apartments',
-    desc: 'Premium apartments designed by award-winning architects, featuring smart home technology and concierge services.',
-    image: 'https://media.base44.com/images/public/69ec59b100bb0a337662905c/fcc06acc9_generated_7c14c89e.png',
-  },
-  {
-    title: 'Sapphire Villas',
-    location: 'Lonavala, Maharashtra',
-    category: 'Villas',
-    desc: 'Hillside luxury villas with private pools, panoramic valley views, and modern minimalist architecture.',
-    image: 'https://media.base44.com/images/public/69ec59b100bb0a337662905c/7f32e5eba_generated_77225cc8.png',
   },
 ];
 
@@ -84,11 +48,6 @@ export default function Projects() {
             <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-semibold text-foreground">
               Our <span className="text-primary">Projects</span>
             </h1>
-            <div className="flex items-center gap-2 mt-4 text-sm text-muted-foreground">
-              <Link to="/" className="hover:text-primary transition-colors">Home</Link>
-              <span>/</span>
-              <span className="text-primary">Projects</span>
-            </div>
           </motion.div>
         </div>
       </section>
@@ -166,7 +125,7 @@ export default function Projects() {
                       onClick={() => setEnquireProject(project)}
                       className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground font-semibold rounded-full hover:bg-primary/90 transition-all duration-300 text-sm"
                     >
-                      Enquire Now
+                      Get in touch
                       <ArrowUpRight className="w-4 h-4" />
                     </button>
                   </div>

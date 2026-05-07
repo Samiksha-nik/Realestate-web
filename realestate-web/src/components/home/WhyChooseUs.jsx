@@ -23,6 +23,8 @@ const stats = [
 const CONTAINER = 420;
 const ICON_SIZE = 60;
 const ORBIT_R = CONTAINER / 2; // place icons on the border of the circle
+const RING_BORDER = 1;
+const DOT_SIZE = 8;
 const iconAngles = [270, 330, 30, 90, 150, 210]; // degrees, top then clockwise
 
 function polarToPx(angleDeg) {
@@ -37,6 +39,20 @@ function polarToPx(angleDeg) {
 
 export default function WhyChooseUs() {
   const [active, setActive] = useState(0);
+  const [dotRotation, setDotRotation] = useState(iconAngles[0] - 270);
+
+  const handleSetActive = (index) => {
+    const targetRotation = iconAngles[index] - 270;
+    let nextRotation = targetRotation;
+
+    // Keep motion in one direction by moving forward in full turns.
+    while (nextRotation < dotRotation) {
+      nextRotation += 360;
+    }
+
+    setDotRotation(nextRotation);
+    setActive(index);
+  };
 
   return (
     <section className="py-24 lg:py-32 bg-background overflow-hidden">
@@ -79,7 +95,7 @@ export default function WhyChooseUs() {
               <div style={{
                 position: 'absolute', inset: 0,
                 borderRadius: '50%',
-                border: '1px solid rgba(197,163,88,0.2)',
+                border: `${RING_BORDER}px solid rgba(197,163,88,0.2)`,
               }} />
 
               {/* Center circle */}
@@ -98,6 +114,7 @@ export default function WhyChooseUs() {
                       <p className="text-foreground font-heading text-lg font-semibold leading-tight">
                         {features[active].title}
                       </p>
+                      <div className="mx-auto mt-3 h-[2px] w-14 rounded-full bg-primary/80" />
                       <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
                         {features[active].desc}
                       </p>
@@ -106,6 +123,28 @@ export default function WhyChooseUs() {
                 </AnimatePresence>
               </div>
 
+              {/* Revolving indicator dot that stays on the orbit line */}
+              <motion.div
+                aria-hidden="true"
+                className="absolute inset-0 pointer-events-none"
+                initial={false}
+                animate={{ rotate: dotRotation }}
+                transition={{ duration: 0.95, ease: [0.22, 1, 0.36, 1] }}
+                style={{ transformOrigin: '50% 50%' }}
+              >
+                <div
+                  className="absolute rounded-full bg-primary shadow-lg shadow-primary/60"
+                  style={{
+                    width: DOT_SIZE,
+                    height: DOT_SIZE,
+                    left: '50%',
+                    // Keep dot center aligned to the ring's stroke center.
+                    top: RING_BORDER / 2,
+                    transform: 'translate(-50%, -50%)',
+                  }}
+                />
+              </motion.div>
+
               {/* Orbiting icons — placed exactly on the circle border */}
               {features.map((f, i) => {
                 const pos = polarToPx(iconAngles[i]);
@@ -113,7 +152,8 @@ export default function WhyChooseUs() {
                 return (
                   <button
                     key={i}
-                    onClick={() => setActive(i)}
+                    onClick={() => handleSetActive(i)}
+                    type="button"
                     style={{ position: 'absolute', left: pos.left, top: pos.top, width: ICON_SIZE, height: ICON_SIZE }}
                   >
                     <motion.div
@@ -141,7 +181,8 @@ export default function WhyChooseUs() {
               {features.map((_, i) => (
                 <button
                   key={i}
-                  onClick={() => setActive(i)}
+                  onClick={() => handleSetActive(i)}
+                  type="button"
                   className={`rounded-full transition-all duration-300 ${
                     active === i ? 'w-6 h-2 bg-primary' : 'w-2 h-2 bg-border hover:bg-primary/40'
                   }`}

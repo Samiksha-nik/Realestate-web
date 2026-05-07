@@ -10,7 +10,7 @@ export default function WhatsAppFloatingButton() {
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-primary text-primary-foreground shadow-2xl shadow-primary/30 border border-primary/30 flex items-center justify-center hover:bg-primary/90 transition-all duration-300 hover:-translate-y-1"
+      className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-[#25D366] text-white shadow-2xl shadow-[#25D366]/35 border border-[#25D366]/40 flex items-center justify-center hover:bg-[#1fbe57] transition-all duration-300 hover:-translate-y-1"
       aria-label="Chat on WhatsApp"
     >
       <svg className="w-7 h-7" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">

@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
 import { Star } from 'lucide-react';
 
 const galleryImages = [
@@ -44,15 +43,6 @@ const testimonials = [
 export default function Testimonials() {
   return (
     <div className="min-h-screen bg-background pt-20">
-      {/* Breadcrumb */}
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 pt-8 pb-4">
-        <div className="flex items-center gap-2 text-sm text-muted-foreground">
-          <Link to="/" className="hover:text-primary transition-colors">Home</Link>
-          <span>/</span>
-          <span className="text-primary">Testimonials</span>
-        </div>
-      </div>
-
       {/* ── Hero Mosaic Section ── */}
       <section className="relative px-6 lg:px-8 pt-4 pb-20 overflow-hidden">
         <div className="max-w-7xl mx-auto relative">

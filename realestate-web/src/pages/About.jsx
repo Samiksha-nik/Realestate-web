@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import { Eye, Gem, HeartHandshake, ShieldCheck } from 'lucide-react';
+import { Eye, Gem, HeartHandshake, Linkedin, ShieldCheck } from 'lucide-react';
 
 const HERO_BG = 'https://media.base44.com/images/public/69ec59b100bb0a337662905c/c256a5ab2_generated_74effe14.png';
 const DIRECTOR_IMG = 'https://media.base44.com/images/public/69ec59b100bb0a337662905c/51ba3eeee_generated_cbc6156c.png';
@@ -52,12 +51,6 @@ export default function About() {
       {/* ── Section 1: Hero ── */}
       <section className="pt-20 px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
-          <div className="flex items-center gap-2 text-xs text-muted-foreground py-6">
-            <Link to="/" className="hover:text-primary transition-colors">Home</Link>
-            <span>/</span>
-            <span className="text-primary">About Us</span>
-          </div>
-
           <motion.div
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
@@ -201,6 +194,18 @@ export default function About() {
               <div className="mt-8 pt-6 border-t border-border/30">
                 <p className="text-foreground font-semibold">Ananya Gupta</p>
                 <p className="text-xs text-muted-foreground">Managing Director, Ananya Realty Advisory LLP</p>
+                <a
+                  href="https://www.linkedin.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-3 inline-flex items-center gap-2 text-xs text-muted-foreground hover:text-primary transition-colors"
+                  aria-label="LinkedIn profile"
+                >
+                  <span className="w-7 h-7 rounded-full bg-secondary border border-border/50 flex items-center justify-center">
+                    <Linkedin className="w-3.5 h-3.5" />
+                  </span>
+                  LinkedIn
+                </a>
               </div>
             </div>
 

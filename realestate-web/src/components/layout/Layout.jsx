@@ -8,6 +8,7 @@ import WhatsAppFloatingButton from '@/components/shared/WhatsAppFloatingButton';
 
 export default function Layout() {
   const [enquiryOpen, setEnquiryOpen] = useState(false);
+  const openEnquiry = () => setEnquiryOpen(true);
 
   return (
     <div className="min-h-screen bg-background">
@@ -20,9 +21,9 @@ export default function Layout() {
         )}
       </AnimatePresence>
 
-      <Header onEnquire={() => setEnquiryOpen(true)} />
+      <Header onEnquire={openEnquiry} />
       <main>
-        <Outlet />
+        <Outlet context={{ openEnquiry }} />
       </main>
       <Footer />
       <WhatsAppFloatingButton />
