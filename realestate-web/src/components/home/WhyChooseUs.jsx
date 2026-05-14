@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Shield, Gem, Clock, Handshake, Star, Users } from 'lucide-react';
+import { Shield, Gem, Clock, Handshake, Star, Users, ArrowUpRight } from 'lucide-react';
 
 const features = [
   { icon: Star,      title: 'Excellence',         desc: 'We set the gold standard in real estate advisory, delivering excellence in every interaction and transaction.' },
@@ -9,13 +10,6 @@ const features = [
   { icon: Gem,       title: 'Curated Selection',   desc: 'Handpicked properties meeting the highest standards of luxury, design, and investment potential.' },
   { icon: Clock,     title: 'End-to-End Support',  desc: 'From property search to final documentation, we guide you at every step of your real estate journey.' },
   { icon: Shield,    title: 'Trusted Expertise',   desc: 'Over a decade of premium real estate advisory with an impeccable track record clients rely on.' },
-];
-
-const stats = [
-  { value: '2,500', suffix: '+', label: 'Happy Families' },
-  { value: '12',    suffix: '+', label: 'Years of Experience' },
-  { value: '150',   suffix: '+', label: 'Projects Completed' },
-  { value: '98',    suffix: '%', label: 'Client Satisfaction' },
 ];
 
 // 6 icon positions evenly around a circle
@@ -77,7 +71,7 @@ export default function WhyChooseUs() {
           </p>
         </motion.div>
 
-        {/* Two-column: orbit left, stats right */}
+        {/* Two-column: orbit left, narrative + CTA right */}
         <div className="flex flex-col lg:flex-row items-stretch gap-12 lg:gap-16">
 
           {/* ── Left: Orbit diagram ── */}
@@ -191,42 +185,76 @@ export default function WhyChooseUs() {
             </div>
           </motion.div>
 
-          {/* ── Right: Stats (zig-zag cards to fill space) ── */}
+          {/* ── Right: narrative spotlight + services CTA ── */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="w-full lg:w-[45%] flex items-start lg:pt-6"
+            className="w-full lg:w-[45%] flex flex-col gap-5 lg:pt-2"
           >
-            <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-5">
-              {stats.map((s, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: i * 0.08 }}
-                  className={`group bg-card border border-primary/25 rounded-2xl p-6 shadow-xl transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/10 ${
-                    i === 0
-                      ? 'sm:-translate-y-6'
-                      : i === 1
-                        ? 'sm:translate-y-2'
-                        : i === 2
-                          ? 'sm:-translate-y-2'
-                          : 'sm:translate-y-7'
-                  }`}
-                >
-                  <div className="flex items-end gap-1 mb-2">
-                    <span className="font-heading text-4xl md:text-5xl font-bold text-foreground group-hover:text-primary transition-colors duration-300">
-                      {s.value}
-                    </span>
-                    <span className="font-heading text-2xl md:text-3xl font-bold text-primary mb-1">{s.suffix}</span>
-                  </div>
-                  <p className="text-xs text-muted-foreground uppercase tracking-widest">{s.label}</p>
-                </motion.div>
-              ))}
-            </div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.55 }}
+              className="relative overflow-hidden rounded-3xl border border-primary/25 bg-gradient-to-br from-card via-card to-obsidian p-8 shadow-2xl shadow-black/30"
+            >
+              <div
+                className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-primary/12 blur-3xl"
+                aria-hidden
+              />
+              <div
+                className="pointer-events-none absolute -bottom-20 -left-10 h-48 w-48 rounded-full bg-primary/5 blur-2xl"
+                aria-hidden
+              />
+              <div className="relative">
+                <span className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-primary">
+                  <span className="h-px w-8 bg-primary/60" aria-hidden />
+                  Partner-led advisory
+                </span>
+                <h3 className="mt-4 font-heading text-2xl md:text-3xl font-semibold text-foreground leading-snug">
+                  Strategy, narrative, and transaction discipline—before the first site visit.
+                </h3>
+                <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                  We stitch together mandate thinking, marketing craft, and closure mechanics so developers and
+                  investors see one coherent story—from positioning decks to possession-ready handovers.
+                </p>
+                <div className="mt-6 flex flex-wrap gap-3">
+                  {['Mandate & positioning', 'Sales-room enablement', 'Channel & CRM', 'Documentation clarity'].map(
+                    (chip) => (
+                      <span
+                        key={chip}
+                        className="rounded-full border border-primary/25 bg-primary/5 px-3 py-1.5 text-[11px] font-medium text-foreground/90"
+                      >
+                        {chip}
+                      </span>
+                    ),
+                  )}
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.45, delay: 0.2 }}
+            >
+              <Link
+                to="/services"
+                className="group flex items-center justify-between gap-4 rounded-2xl border border-primary/20 bg-gradient-to-r from-primary/10 via-transparent to-primary/5 px-5 py-4 text-sm font-medium text-foreground transition-all hover:border-primary/40 hover:from-primary/15"
+              >
+                <span>
+                  See how we structure mandates, marketing, and advisory{' '}
+                  <span className="text-primary">across the full journey</span>.
+                </span>
+                <span className="flex shrink-0 items-center gap-1 rounded-full bg-primary px-3 py-1.5 text-xs font-semibold text-primary-foreground transition-transform group-hover:translate-x-0.5">
+                  Services
+                  <ArrowUpRight className="h-3.5 w-3.5" />
+                </span>
+              </Link>
+            </motion.div>
           </motion.div>
 
         </div>

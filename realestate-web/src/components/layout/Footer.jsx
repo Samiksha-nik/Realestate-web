@@ -2,12 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Phone, Mail, ArrowRight, Facebook, Instagram, Linkedin, MapPin } from 'lucide-react';
 import houseImage from '../../assets/home-removebg-preview.png';
-import companyLogo from '@/assets/ananya_logo_enhanced 4x.png';
+import companyLogo from '@/assets/ananya logo_White.png';
 
 const quickLinks = [
   { label: 'Home', path: '/' },
   { label: 'About Us', path: '/about' },
   { label: 'Projects', path: '/projects' },
+  { label: 'Our Services', path: '/services' },
+  { label: 'Careers', path: '/careers' },
   { label: 'Testimonials', path: '/testimonials' },
   { label: 'FAQ', path: '/faq' },
   { label: 'Contact Us', path: '/contact' },
@@ -90,7 +92,7 @@ export default function Footer() {
             {/* Links + About */}
             <div className="lg:col-span-6 p-8 lg:p-10 border-b lg:border-b-0 lg:border-r border-border/30">
               <div className="flex flex-wrap items-center gap-x-7 gap-y-2 text-sm font-semibold text-foreground">
-                {quickLinks.slice(0, 6).map((link) => (
+                {quickLinks.map((link) => (
                   <Link key={link.path} to={link.path} className="hover:text-primary transition-colors">
                     {link.label}
                   </Link>

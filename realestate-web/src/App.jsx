@@ -15,6 +15,8 @@ import Services from './pages/Services';
 import Testimonials from './pages/Testimonials';
 import FAQ from './pages/FAQ';
 import Contact from './pages/Contact';
+import Careers from './pages/Careers';
+import JobDetail from './pages/JobDetail';
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -46,6 +48,8 @@ const AuthenticatedApp = () => {
         <Route path="/about" element={<About />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/services" element={<Services />} />
+        <Route path="/careers" element={<Careers />} />
+        <Route path="/careers/:jobSlug" element={<JobDetail />} />
         <Route path="/testimonials" element={<Testimonials />} />
         <Route path="/faq" element={<FAQ />} />
         <Route path="/contact" element={<Contact />} />

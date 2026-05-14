@@ -8,20 +8,20 @@ const DIRECTOR_IMG = 'https://media.base44.com/images/public/69ec59b100bb0a33766
 const journeyCards = [
   {
     year: 'Our Vision',
-    title: 'A premium property experience, made simple',
-    desc: 'To be India’s most trusted real estate advisory—helping families and investors discover homes and opportunities that truly match their lifestyle, goals, and values.',
+    title: 'A trusted name in mandate and advisory services',
+    desc: 'To become a trusted name in the Indian real estate mandate and advisory sector by providing transparent, reliable, and customer-focused services that set new industry standards.',
     icon: Eye,
   },
   {
     year: 'Our Mission',
-    title: 'Expert guidance. Transparent process. Real value.',
-    desc: 'We deliver curated listings, honest advice, and end-to-end support—so every decision feels confident, clear, and genuinely premium.',
+    title: 'A strategic bridge between developers and buyers',
+    desc: 'Act as a trusted bridge between developers and homebuyers, deliver strategic marketing solutions for strong project success, maintain ethical long-term relationships, and drive measurable outcomes through innovative approaches.',
     icon: HeartHandshake,
   },
   {
     year: 'Our Values',
-    title: 'Integrity, care, and craftsmanship',
-    desc: 'We put clients first, communicate transparently, and hold ourselves to high standards—because trust is the foundation of every home journey.',
+    title: 'Integrity, innovation, and accountability',
+    desc: 'We lead with transparency, stay client-first in every decision, embrace innovation to solve complex challenges, and uphold accountability to deliver consistent, high-quality results.',
     icon: Gem,
   },
 ];
@@ -49,7 +49,7 @@ export default function About() {
     <div className="min-h-screen bg-background">
 
       {/* ── Section 1: Hero ── */}
-      <section className="pt-20 px-6 lg:px-8">
+      <section className="pt-28 md:pt-32 lg:pt-36 px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 18 }}
@@ -68,8 +68,8 @@ export default function About() {
                 About Ananya Realty
               </span>
               <h1 className="mt-6 font-heading text-4xl md:text-5xl lg:text-6xl font-semibold text-foreground leading-tight">
-                Your Trusted Partner in{' '}
-                <span className="text-primary italic">Premium Real Estate</span>
+                Your trusted strategic partner in{' '}
+                <span className="text-primary italic">real estate</span>
               </h1>
               <p className="mt-6 max-w-3xl mx-auto text-sm md:text-base text-foreground/70 leading-relaxed">
                 For over a decade, we’ve helped clients buy, sell, and invest with confidence—through curated listings,
@@ -174,26 +174,25 @@ export default function About() {
             <div className="lg:col-span-3 p-8 lg:p-10">
               <div className="w-10 h-0.5 bg-primary mb-6" />
               <h3 className="font-heading text-2xl font-semibold text-foreground mb-4">
-                A note from leadership
+                Meet Our Founder
               </h3>
               <div className="space-y-4 text-sm text-muted-foreground leading-relaxed">
                 <p>
-                  Ananya Realty Advisory LLP was built on one simple belief: property decisions should feel confident,
-                  transparent, and truly premium. We focus on clarity, due diligence, and a client-first process.
+                  Mr. Deepak Tripathi brings 16 years of exceptional industry insights and an unwavering commitment
+                  to quality service. His vision has shaped Ananya Realty Advisory LLP into a dynamic firm known for
+                  efficiency, integrity, and outstanding results.
                 </p>
                 <p>
-                  Our team curates opportunities, validates details, and stays close to you from the first conversation
-                  to the final paperwork—so you can move forward with peace of mind.
-                </p>
-                <p>
-                  Thank you for trusting us with one of life’s biggest decisions. We’re honored to be part of your
-                  journey.
+                  Under his strategic leadership, the company has cultivated strong relationships with renowned
+                  developers and successfully driven sales across multiple high-value projects. His hands-on approach
+                  and deep understanding of market dynamics ensure every mandate receives personalized attention and
+                  expert execution.
                 </p>
               </div>
 
               <div className="mt-8 pt-6 border-t border-border/30">
-                <p className="text-foreground font-semibold">Ananya Gupta</p>
-                <p className="text-xs text-muted-foreground">Managing Director, Ananya Realty Advisory LLP</p>
+                <p className="text-foreground font-semibold">Deepak Tripathi</p>
+                <p className="text-xs text-muted-foreground">Founder & Director, Ananya Realty Advisory LLP</p>
                 <a
                   href="https://www.linkedin.com/"
                   target="_blank"

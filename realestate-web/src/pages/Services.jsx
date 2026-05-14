@@ -7,33 +7,33 @@ const HERO_IMG =
 
 const services = [
   {
-    title: "Property Discovery",
-    desc: "Curated shortlists based on your budget, lifestyle, and location preferences—so you see only what fits.",
+    title: "Real Estate Mandate Marketing",
+    desc: "We provide end-to-end mandate marketing solutions, expertly guiding real estate projects from launch to sustained sales with a smooth journey from start to finish.",
     icon: Search,
   },
   {
-    title: "Site Visits & Comparisons",
-    desc: "Assisted visits, side-by-side comparisons, and honest pros/cons to help you choose with clarity.",
+    title: "Exclusive Agency Agreements",
+    desc: "With a strong track record in securing high-value exclusive agreements, we partner with developers to deliver focused sales and marketing efforts.",
     icon: BadgeCheck,
   },
   {
-    title: "Negotiation & Closure",
-    desc: "We negotiate for the best value and align timelines—then guide you through closing seamlessly.",
+    title: "Channel Partner Outreach & Management",
+    desc: "Our extensive network of channel partners significantly boosts project visibility and reach, helping each project achieve widespread market success.",
     icon: Handshake,
   },
   {
-    title: "Legal Due Diligence",
-    desc: "Title checks, document verification, and RERA compliance to ensure your purchase stays protected.",
+    title: "Innovative Marketing & Brand Building",
+    desc: "We implement creative brand-building strategies, performance marketing, and tech initiatives that improve perception and project positioning.",
     icon: ShieldCheck,
   },
   {
-    title: "Documentation Support",
-    desc: "From agreements to registrations—we coordinate the paperwork so you can move fast with confidence.",
+    title: "Comprehensive Market Analysis & Strategy",
+    desc: "We deliver deep market insights and strategic guidance, empowering developers to make informed decisions and maximize market position.",
     icon: FileText,
   },
   {
-    title: "Investment Advisory",
-    desc: "ROI-focused guidance on micro-markets, entry timing, and exit strategy for long-term wealth creation.",
+    title: "Tailored Solutions for Complex Projects",
+    desc: "We provide non-traditional solutions for projects facing unique challenges, from partner alignment to location-related constraints.",
     icon: Wallet,
   },
 ];
@@ -77,14 +77,11 @@ export default function Services() {
       {/* Services Grid */}
       <section className="pb-20 lg:pb-28">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto">
-            <p className="text-xs text-muted-foreground uppercase tracking-widest">Services</p>
+          <div className="text-center max-w-3xl mx-auto">
+            <p className="text-xs text-primary uppercase tracking-widest font-semibold">Featured Services</p>
             <h2 className="mt-3 font-heading text-3xl md:text-4xl font-semibold text-foreground">
-              A wide range of <span className="text-primary italic">real estate</span> services
+              A wide range of <span className="text-primary italic">real estate services</span>
             </h2>
-            <p className="mt-4 text-muted-foreground text-sm md:text-base">
-              Everything you need—shortlisting, visits, negotiation, legal checks, and paperwork—under one roof.
-            </p>
           </div>
 
           <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
@@ -122,6 +119,16 @@ export default function Services() {
                 </motion.div>
               );
             })}
+          </div>
+
+          <div className="mt-10 rounded-2xl border-2 border-primary/50 bg-card/40 p-8 text-center shadow-lg shadow-primary/5">
+            <h3 className="font-heading text-2xl md:text-3xl font-semibold text-foreground">
+              Full-Service Real Estate Consultancy
+            </h3>
+            <p className="mt-3 text-muted-foreground text-sm md:text-base max-w-3xl mx-auto">
+              From sourcing to closing, our expert team delivers comprehensive real estate consultancy,
+              covering every aspect of the journey with precision and care.
+            </p>
           </div>
         </div>
       </section>

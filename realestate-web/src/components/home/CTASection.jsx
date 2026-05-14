@@ -22,7 +22,7 @@ export default function CTASection({ onConsultation }) {
           <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground leading-tight">
             Ready to Find Your
             <br />
-            <span className="text-primary italic">Dream Property?</span>
+            <span className="text-primary italic">Strategic Partner</span>
           </h2>
           <p className="mt-6 text-muted-foreground text-lg max-w-xl mx-auto">
             Let our experts guide you to the perfect home that matches your lifestyle and aspirations.

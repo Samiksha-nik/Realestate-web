@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Phone } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import companyLogo from '@/assets/ananya_logo_enhanced 4x.png';
+import companyLogo from '@/assets/ananya logo_White.png';
 
 const navLinks = [
   { label: 'Home', path: '/' },
   { label: 'About Us', path: '/about' },
   { label: 'Projects', path: '/projects' },
   { label: 'Our Services', path: '/services' },
+  { label: 'Careers', path: '/careers' },
   { label: 'Testimonials', path: '/testimonials' },
   { label: 'FAQ', path: '/faq' },
   { label: 'Contact Us', path: '/contact' },
@@ -28,6 +29,13 @@ export default function Header({ onEnquire }) {
   useEffect(() => {
     setMobileOpen(false);
   }, [location.pathname]);
+
+  const isNavActive = (path) => {
+    if (path === '/careers') {
+      return location.pathname === '/careers' || location.pathname.startsWith('/careers/');
+    }
+    return location.pathname === path;
+  };
 
   return (
     <>
@@ -56,13 +64,13 @@ export default function Header({ onEnquire }) {
                   key={link.path}
                   to={link.path}
                   className={`relative px-4 py-2 text-sm font-medium tracking-wide transition-colors duration-300 ${
-                    location.pathname === link.path
+                    isNavActive(link.path)
                       ? 'text-primary'
                       : 'text-foreground/70 hover:text-foreground'
                   }`}
                 >
                   {link.label}
-                  {location.pathname === link.path && (
+                  {isNavActive(link.path) && (
                     <motion.div
                       layoutId="activeNav"
                       className="absolute bottom-0 left-4 right-4 h-0.5 bg-primary"
@@ -115,7 +123,7 @@ export default function Header({ onEnquire }) {
                   <Link
                     to={link.path}
                     className={`block py-4 text-2xl font-heading border-b border-border/30 transition-colors ${
-                      location.pathname === link.path
+                      isNavActive(link.path)
                         ? 'text-primary'
                         : 'text-foreground/70'
                     }`}
