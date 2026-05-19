@@ -1,6 +1,12 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { Star } from 'lucide-react';
+import payalAvatar from '@/assets/Payal yashwanth jadhav.jpeg';
+import smitaAvatar from '@/assets/Smita  sachin Gujar.jpeg';
+import niteshAvatar from '@/assets/Nitesh shivkumar pandey.jpeg';
+import sarfarazAvatar from '@/assets/Sarfaraz Abrar Shaikh.jpeg';
+import ashishAvatar from '@/assets/Aasish Katariya.jpg';
+import dishaAvatar from '@/assets/Disha Bhagat.jpg';
 
 const galleryImages = [
   { src: 'https://media.base44.com/images/public/69ec59b100bb0a337662905c/65bb22552_generated_45c4d000.png', class: 'row-span-2' },
@@ -18,24 +24,45 @@ const galleryImages = [
 
 const testimonials = [
   {
-    name: 'Priya Sharma',
-    role: 'Homeowner, Bandra',
-    avatar: 'https://media.base44.com/images/public/69ec59b100bb0a337662905c/7585fef3f_generated_37829319.png',
-    text: '"Ananya Realty made our dream of owning a luxury apartment a reality. Their team understood exactly what we were looking for and guided us through every step. The entire experience was seamless and truly premium."',
+    name: 'Payal Yashwanth Jadhav',
+    role: 'Client',
+    avatar: payalAvatar,
+    text: '"Ananya Realty Advisory is the mandate firm that truly cares about their clients. They attend to you professionally and help you take the right decision."',
     rating: 5,
   },
   {
-    name: 'Rajesh Mehta',
-    role: 'Real Estate Investor, Powai',
-    avatar: 'https://media.base44.com/images/public/69ec59b100bb0a337662905c/1b9fbfc73_generated_89a8d739.png',
-    text: '"As a real estate investor, I value expertise and transparency. Ananya Realty delivered both in abundance. Their market insights helped me make informed decisions, and the returns have exceeded my expectations."',
+    name: 'Smita Sachin Gujar',
+    role: 'Client',
+    avatar: smitaAvatar,
+    text: '"Ananya Realty Advisory employees are very helpful. They gave us proper details about the projects and deal with complete transparency."',
     rating: 5,
   },
   {
-    name: 'Anita & Vikram Patel',
-    role: 'First-time Buyers, Thane',
-    avatar: 'https://media.base44.com/images/public/69ec59b100bb0a337662905c/3153141b7_generated_2e35cd7c.png',
-    text: '"We were nervous about buying our first home, but the team at Ananya Realty put us completely at ease. They found us a beautiful apartment within our budget and handled all the paperwork. Highly recommended!"',
+    name: 'Nitesh Shivkumar Pandey',
+    role: 'Employee',
+    avatar: niteshAvatar,
+    text: '"Ananya Realty works with transparency with channel partners and clients. They deal with things professionally and also care for their employees."',
+    rating: 5,
+  },
+  {
+    name: 'Sarfaraz Abrar Shaikh',
+    role: 'Client',
+    avatar: sarfarazAvatar,
+    text: '"Excellent experience with Ananya Realty Advisory LLP! They have an outstanding understanding of local real estate trends and offer highly credible advisory services. The team is incredibly supportive, responsive, and trustworthy. A five-star service all the way!"',
+    rating: 5,
+  },
+  {
+    name: 'Ashish Katariya',
+    role: 'Mandate Partner',
+    avatar: ashishAvatar,
+    text: '"As a mandate partner, Ananya Realty Advisory has been outstanding. Their team guides clients with clarity, handles every interaction professionally, and helps people make confident property decisions with full transparency."',
+    rating: 5,
+  },
+  {
+    name: 'Disha Bhagat',
+    role: 'Client',
+    avatar: dishaAvatar,
+    text: '"Ananya Realty Advisory is a mandate firm that genuinely puts clients first. From project insights to follow-ups, their professional and transparent approach made our entire property journey smooth and stress-free."',
     rating: 5,
   },
 ];
@@ -180,7 +207,7 @@ export default function Testimonials() {
                 Testimonials
               </span>
               <h1 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight drop-shadow-2xl">
-                Trusted by Homeowners
+                Trusted by Real Estate Developers
                 <br />
                 <span className="text-primary italic">& Investors</span>
               </h1>
@@ -234,12 +261,12 @@ export default function Testimonials() {
               display: 'flex',
               gap: '24px',
               width: 'max-content',
-              animation: 'marquee 25s linear infinite',
+              animation: 'marquee 40s linear infinite',
             }}
           >
             {[...testimonials, ...testimonials, ...testimonials].map((t, i) => (
               <div
-                key={i}
+                key={`${t.name}-${i}`}
                 style={{ width: '360px', flexShrink: 0 }}
                 className="p-8 rounded-2xl bg-card border border-border/50 hover:border-primary/30 transition-all duration-300"
               >

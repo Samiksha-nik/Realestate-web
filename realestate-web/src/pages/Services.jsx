@@ -12,7 +12,7 @@ const services = [
     icon: Search,
   },
   {
-    title: "Exclusive Agency Agreements",
+    title: "Exclusive Mandate Agreements",
     desc: "With a strong track record in securing high-value exclusive agreements, we partner with developers to deliver focused sales and marketing efforts.",
     icon: BadgeCheck,
   },
@@ -67,7 +67,7 @@ export default function Services() {
               Our <span className="text-primary italic">Services</span>
             </h1>
             <p className="mt-5 text-foreground/70 text-sm md:text-base leading-relaxed">
-              A premium, end-to-end advisory experience—from discovery to documentation—built to make every decision
+              A premium, end-to-end advisory experience-from discovery to documentation-built to make every decision
               feel clear and confident.
             </p>
           </motion.div>
@@ -123,11 +123,10 @@ export default function Services() {
 
           <div className="mt-10 rounded-2xl border-2 border-primary/50 bg-card/40 p-8 text-center shadow-lg shadow-primary/5">
             <h3 className="font-heading text-2xl md:text-3xl font-semibold text-foreground">
-              Full-Service Real Estate Consultancy
+            Strategic Real Estate Mandate Partner
             </h3>
             <p className="mt-3 text-muted-foreground text-sm md:text-base max-w-3xl mx-auto">
-              From sourcing to closing, our expert team delivers comprehensive real estate consultancy,
-              covering every aspect of the journey with precision and care.
+            From sourcing to closing, our expert team delivers seamless real estate solutions with precision, transparency, and excellence.
             </p>
           </div>
         </div>

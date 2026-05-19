@@ -1,9 +1,8 @@
 import React from "react";
+import { getWhatsAppUrl } from "@/constants/social";
 
 export default function WhatsAppFloatingButton() {
-  const phone = "919876543210"; // update if needed
-  const message = "Hi Ananya Realty! I would like to enquire about a property.";
-  const href = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+  const href = getWhatsAppUrl();
 
   return (
     <a

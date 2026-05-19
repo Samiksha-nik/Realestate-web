@@ -1,7 +1,29 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Shield, Gem, Clock, Handshake, Star, Users, ArrowUpRight } from 'lucide-react';
+import { Shield, Gem, Clock, Handshake, Star, Users, Award, MapPinned, Scale, Target } from 'lucide-react';
+
+const advantageCards = [
+  {
+    icon: Award,
+    title: 'Proven Results',
+    desc: 'Our portfolio of 10+ successful projects demonstrates our ability to deliver exceptional outcomes consistently.',
+  },
+  {
+    icon: MapPinned,
+    title: 'Market Knowledge',
+    desc: 'Deep understanding of Mumbai, Thane, and Navi Mumbai markets ensures informed strategies.',
+  },
+  {
+    icon: Scale,
+    title: 'Ethical Approach',
+    desc: 'We build long-term relationships through transparency, integrity, and honest dealings.',
+  },
+  {
+    icon: Target,
+    title: 'Consistent Performance',
+    desc: 'Demonstrated ability to deliver value and achieve sales targets, with a portfolio of 10+ successfully marketed projects spanning residential and commercial sectors.',
+  },
+];
 
 const features = [
   { icon: Star,      title: 'Excellence',         desc: 'We set the gold standard in real estate advisory, delivering excellence in every interaction and transaction.' },
@@ -67,20 +89,19 @@ export default function WhyChooseUs() {
             Why Choose Ananya Realty
           </h2>
           <p className="mt-4 text-muted-foreground max-w-xl mx-auto text-base">
-            We don't just find properties — we craft personalized real estate experiences tailored to your aspirations.
+            We don't just find properties - we craft personalized real estate experiences tailored to your aspirations.
           </p>
         </motion.div>
 
-        {/* Two-column: orbit left, narrative + CTA right */}
-        <div className="flex flex-col lg:flex-row items-stretch gap-12 lg:gap-16">
-
+        {/* Two-column: orbit left, strategic advantages right */}
+        <div className="flex flex-col lg:flex-row items-start gap-12 lg:gap-16">
           {/* ── Left: Orbit diagram ── */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="w-full lg:w-[55%] flex flex-col items-center"
+            className="w-full lg:w-[55%] flex flex-col items-center shrink-0"
           >
             {/* Orbit canvas — fixed 420×420 px so polar math is exact */}
             <div style={{ position: 'relative', width: CONTAINER, height: CONTAINER }}>
@@ -185,78 +206,44 @@ export default function WhyChooseUs() {
             </div>
           </motion.div>
 
-          {/* ── Right: narrative spotlight + services CTA ── */}
+          {/* ── Right: horizontal cards stacked to match orbit height (CONTAINER) ── */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="w-full lg:w-[45%] flex flex-col gap-5 lg:pt-2"
+            className="w-full lg:w-[45%] flex flex-col min-w-0"
           >
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.55 }}
-              className="relative overflow-hidden rounded-3xl border border-primary/25 bg-gradient-to-br from-card via-card to-obsidian p-8 shadow-2xl shadow-black/30"
-            >
-              <div
-                className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-primary/12 blur-3xl"
-                aria-hidden
-              />
-              <div
-                className="pointer-events-none absolute -bottom-20 -left-10 h-48 w-48 rounded-full bg-primary/5 blur-2xl"
-                aria-hidden
-              />
-              <div className="relative">
-                <span className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-primary">
-                  <span className="h-px w-8 bg-primary/60" aria-hidden />
-                  Partner-led advisory
-                </span>
-                <h3 className="mt-4 font-heading text-2xl md:text-3xl font-semibold text-foreground leading-snug">
-                  Strategy, narrative, and transaction discipline—before the first site visit.
-                </h3>
-                <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-                  We stitch together mandate thinking, marketing craft, and closure mechanics so developers and
-                  investors see one coherent story—from positioning decks to possession-ready handovers.
-                </p>
-                <div className="mt-6 flex flex-wrap gap-3">
-                  {['Mandate & positioning', 'Sales-room enablement', 'Channel & CRM', 'Documentation clarity'].map(
-                    (chip) => (
-                      <span
-                        key={chip}
-                        className="rounded-full border border-primary/25 bg-primary/5 px-3 py-1.5 text-[11px] font-medium text-foreground/90"
-                      >
-                        {chip}
-                      </span>
-                    ),
-                  )}
-                </div>
-              </div>
-            </motion.div>
+            <div className="shrink-0 mb-4 lg:mb-3">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-primary">Our edge</p>
+              <h3 className="mt-1 font-heading text-lg sm:text-xl md:text-2xl font-semibold text-foreground leading-tight">
+                Our Strategic Advantages
+              </h3>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.45, delay: 0.2 }}
-            >
-              <Link
-                to="/services"
-                className="group flex items-center justify-between gap-4 rounded-2xl border border-primary/20 bg-gradient-to-r from-primary/10 via-transparent to-primary/5 px-5 py-4 text-sm font-medium text-foreground transition-all hover:border-primary/40 hover:from-primary/15"
-              >
-                <span>
-                  See how we structure mandates, marketing, and advisory{' '}
-                  <span className="text-primary">across the full journey</span>.
-                </span>
-                <span className="flex shrink-0 items-center gap-1 rounded-full bg-primary px-3 py-1.5 text-xs font-semibold text-primary-foreground transition-transform group-hover:translate-x-0.5">
-                  Services
-                  <ArrowUpRight className="h-3.5 w-3.5" />
-                </span>
-              </Link>
-            </motion.div>
+            <div className="flex flex-col gap-3 w-full lg:h-[420px] lg:max-h-[420px] min-h-0">
+              {advantageCards.map((item, i) => (
+                <motion.div
+                  key={item.title}
+                  initial={{ opacity: 0, x: 12 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: i * 0.05 }}
+                  className="group flex flex-1 min-h-0 flex-row items-center gap-3 sm:gap-4 rounded-xl border border-primary/25 bg-card/70 px-3 py-2.5 sm:px-4 sm:py-3 shadow-xl shadow-black/30 transition-all hover:-translate-y-0.5 hover:border-primary/45 hover:bg-card hover:shadow-2xl hover:shadow-primary/10"
+                >
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-primary/30 bg-primary/10 text-primary sm:h-11 sm:w-11">
+                    <item.icon className="h-5 w-5" strokeWidth={1.75} />
+                  </div>
+                  <div className="min-w-0 flex-1 py-0.5">
+                    <h4 className="font-heading text-sm font-semibold text-foreground leading-tight">{item.title}</h4>
+                    <p className="mt-1 text-[11px] sm:text-xs text-muted-foreground leading-snug line-clamp-3 sm:line-clamp-none">
+                      {item.desc}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </motion.div>
-
         </div>
       </div>
     </section>

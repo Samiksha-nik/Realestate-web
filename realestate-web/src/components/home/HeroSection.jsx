@@ -3,22 +3,31 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Send } from 'lucide-react';
 import { Input } from '@/components/ui/input';
-import { toast } from 'sonner';
+import { FORM_TYPES } from '@/lib/emailService';
+import { useWebsiteFormSubmit } from '@/hooks/useWebsiteFormSubmit';
 import heroImage from '@/assets/herosection.png';
 
 const HERO_IMG = heroImage;
 
 export default function HeroSection() {
-  const [form, setForm] = useState({ name: '', phone: '' });
-  const [sending, setSending] = useState(false);
+  const [form, setForm] = useState({ name: '', email: '', phone: '' });
+  const { submit, sending } = useWebsiteFormSubmit({
+    formType: FORM_TYPES.HERO_ENQUIRY,
+    successMessage: "Enquiry sent! We've also emailed you a confirmation.",
+    onSuccess: () => setForm({ name: '', email: '', phone: '' }),
+  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setSending(true);
-    await new Promise(r => setTimeout(r, 1200));
-    setSending(false);
-    toast.success("We'll get back to you shortly!");
-    setForm({ name: '', phone: '' });
+    await submit({
+      fields: {
+        Name: form.name,
+        Email: form.email,
+        Phone: form.phone ? `+91 ${form.phone}` : '',
+      },
+      userEmail: form.email,
+      userName: form.name,
+    });
   };
 
   return (
@@ -28,14 +37,15 @@ export default function HeroSection() {
         <img
           src={HERO_IMG}
           alt="Luxury real estate"
-          className="w-full h-full object-cover object-[50%_38%] lg:object-center brightness-110"
+          className="w-full h-full object-cover object-[50%_38%] lg:object-center brightness-[1.28]"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-obsidian/75 via-obsidian/50 to-obsidian/15" />
-        <div className="absolute inset-0 bg-gradient-to-t from-obsidian/50 via-transparent to-obsidian/25" />
-        <div className="absolute inset-0 opacity-60 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.14),transparent_55%),radial-gradient(circle_at_top_right,rgba(255,255,255,0.12),transparent_55%),radial-gradient(circle_at_bottom_left,rgba(255,255,255,0.10),transparent_60%),radial-gradient(circle_at_bottom_right,rgba(255,255,255,0.10),transparent_60%)]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-black/10 to-black/40" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/5 via-transparent to-black/20" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_85%_65%_at_0%_0%,rgba(255,255,255,0.32),transparent_58%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.22),transparent_48%),radial-gradient(circle_at_top_right,rgba(255,255,255,0.18),transparent_45%),radial-gradient(circle_at_bottom_left,rgba(255,255,255,0.14),transparent_50%),radial-gradient(circle_at_bottom_right,rgba(255,255,255,0.12),transparent_50%)]" />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full pt-24 pb-16">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full pt-[5.5rem] pb-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
 
           {/* ── Left: Text ── */}
@@ -48,11 +58,11 @@ export default function HeroSection() {
             <motion.h1
               className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight"
             >
-              Your Gateway
+              Your Trusted Partner for
               <br />
-              to Premium
+              Exclusive Project
               <br />
-              <span className="text-primary italic">Properties</span>
+              <span className="text-primary italic">Mandates</span>
             </motion.h1>
 
             <motion.p
@@ -61,7 +71,7 @@ export default function HeroSection() {
               transition={{ duration: 0.8, delay: 0.5 }}
               className="mt-6 text-base text-foreground/70 max-w-sm leading-relaxed"
             >
-              Discover carefully curated luxury properties and landmark developments that inspire modern living.
+              Connecting developers with strategic sales, premium marketing, and qualified buyers through exclusive real estate mandate partnerships.
             </motion.p>
 
             <motion.div
@@ -99,6 +109,18 @@ export default function HeroSection() {
                     placeholder="Your full name"
                     value={form.name}
                     onChange={e => setForm({ ...form, name: e.target.value })}
+                    required
+                    className="bg-background border-border/50 focus:border-primary h-10 text-sm"
+                  />
+                </div>
+
+                <div>
+                  <label className="text-xs text-muted-foreground mb-1.5 block">Email</label>
+                  <Input
+                    type="email"
+                    placeholder="you@example.com"
+                    value={form.email}
+                    onChange={e => setForm({ ...form, email: e.target.value })}
                     required
                     className="bg-background border-border/50 focus:border-primary h-10 text-sm"
                   />

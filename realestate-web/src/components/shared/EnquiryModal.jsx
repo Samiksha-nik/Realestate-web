@@ -3,19 +3,34 @@ import { motion } from "framer-motion";
 import { X, Send } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { toast } from "sonner";
+import { FORM_TYPES } from "@/lib/emailService";
+import { useWebsiteFormSubmit } from "@/hooks/useWebsiteFormSubmit";
 
 export default function EnquiryModal({ title = "Enquire Now", subtitle, onClose }) {
   const [form, setForm] = useState({ firstName: "", lastName: "", email: "", phone: "", message: "" });
-  const [sending, setSending] = useState(false);
+  const { submit, sending } = useWebsiteFormSubmit({
+    formType: FORM_TYPES.ENQUIRY,
+    successMessage: "Enquiry sent! We've also emailed you a confirmation.",
+    onSuccess: () => {
+      setForm({ firstName: "", lastName: "", email: "", phone: "", message: "" });
+      onClose?.();
+    },
+  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setSending(true);
-    await new Promise((r) => setTimeout(r, 1200));
-    setSending(false);
-    toast.success("Enquiry sent! We'll get back to you soon.");
-    onClose?.();
+    const userName = `${form.firstName} ${form.lastName}`.trim();
+    await submit({
+      fields: {
+        "First Name": form.firstName,
+        "Last Name": form.lastName,
+        Email: form.email,
+        Phone: form.phone ? `+91 ${form.phone}` : "",
+        Message: form.message || "—",
+      },
+      userEmail: form.email,
+      userName,
+    });
   };
 
   return (

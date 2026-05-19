@@ -3,6 +3,8 @@ import { Link, useParams, Navigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, Check, X } from 'lucide-react';
 import { toast } from 'sonner';
+import { FORM_TYPES } from '@/lib/emailService';
+import { useWebsiteFormSubmit } from '@/hooks/useWebsiteFormSubmit';
 import { getJobBySlug } from '@/data/careers';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -19,9 +21,24 @@ export default function JobDetail() {
   });
   const [fileName, setFileName] = useState('');
   const [fileKey, setFileKey] = useState(0);
-  const [sending, setSending] = useState(false);
   const [thanksOpen, setThanksOpen] = useState(false);
   const thanksTimerRef = useRef(null);
+  const formRef = useRef(null);
+
+  const { submit, sending } = useWebsiteFormSubmit({
+    formType: FORM_TYPES.CAREER,
+    showSuccessToast: false,
+    onSuccess: () => {
+      setForm({ fullName: '', email: '', phone: '', coverLetter: '', consent: false });
+      setFileName('');
+      setFileKey((k) => k + 1);
+      setThanksOpen(true);
+      thanksTimerRef.current = setTimeout(() => {
+        setThanksOpen(false);
+        thanksTimerRef.current = null;
+      }, 5500);
+    },
+  });
 
   const closeThanks = () => {
     setThanksOpen(false);
@@ -47,17 +64,19 @@ export default function JobDetail() {
       toast.error('Please accept the data handling consent to continue.');
       return;
     }
-    setSending(true);
-    await new Promise((r) => setTimeout(r, 900));
-    setSending(false);
-    setForm({ fullName: '', email: '', phone: '', coverLetter: '', consent: false });
-    setFileName('');
-    setFileKey((k) => k + 1);
-    setThanksOpen(true);
-    thanksTimerRef.current = setTimeout(() => {
-      setThanksOpen(false);
-      thanksTimerRef.current = null;
-    }, 5500);
+    await submit({
+      fields: {
+        Position: job.title,
+        'Full Name': form.fullName,
+        Email: form.email,
+        Phone: form.phone ? `+91 ${form.phone}` : '',
+        'Cover Letter': form.coverLetter,
+        'Resume File': fileName || 'Attached',
+      },
+      userEmail: form.email,
+      userName: form.fullName,
+      resumeFile: formRef.current?.querySelector('input[type="file"]')?.files?.[0] ?? null,
+    });
   };
 
   return (
@@ -79,7 +98,7 @@ export default function JobDetail() {
         >
           <h1 className="font-heading text-3xl md:text-4xl font-semibold text-foreground">{job.title}</h1>
           <p className="mt-2 text-sm text-primary">
-            Ananya Realty · {job.posted}
+            Ananya Realty Advisory LLP · {job.posted}
           </p>
 
           <div className="mt-6 space-y-2 text-sm text-foreground/90">
@@ -161,7 +180,7 @@ export default function JobDetail() {
           className="mt-10 rounded-2xl border border-border/50 bg-card/50 p-6 md:p-8"
         >
           <h2 className="font-heading text-lg font-semibold text-foreground">Apply for this position</h2>
-          <form onSubmit={handleSubmit} className="mt-6 space-y-5">
+          <form ref={formRef} onSubmit={handleSubmit} className="mt-6 space-y-5">
             <div>
               <label className="text-xs text-muted-foreground mb-1.5 block">
                 Full Name <span className="text-primary">*</span>
@@ -232,6 +251,7 @@ export default function JobDetail() {
               </label>
               <input
                 key={fileKey}
+                name="resume"
                 type="file"
                 accept=".pdf,.doc,.docx"
                 required

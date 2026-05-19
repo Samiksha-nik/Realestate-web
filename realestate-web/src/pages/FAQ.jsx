@@ -72,7 +72,7 @@ const faqs = {
     },
     {
       q: 'What makes your approach different?',
-      a: 'Our approach is built on transparency, strategic execution, ethical practices, and long-term developer relationships—with a one-stop solution for sales collection and CRM.',
+      a: 'Our approach is built on transparency, strategic execution, ethical practices, and long-term developer relationships-with a one-stop solution for sales collection and CRM.',
     },
     {
       q: 'Do you manage the customer journey as well?',

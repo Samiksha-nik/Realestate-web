@@ -1,9 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Eye, Gem, HeartHandshake, Linkedin, ShieldCheck } from 'lucide-react';
+import { Eye, Gem, HeartHandshake, Linkedin } from 'lucide-react';
+import deepakPhoto from '@/assets/Deepak.png';
 
 const HERO_BG = 'https://media.base44.com/images/public/69ec59b100bb0a337662905c/c256a5ab2_generated_74effe14.png';
-const DIRECTOR_IMG = 'https://media.base44.com/images/public/69ec59b100bb0a337662905c/51ba3eeee_generated_cbc6156c.png';
 
 const journeyCards = [
   {
@@ -28,19 +28,16 @@ const journeyCards = [
 
 const whyChoose = [
   {
-    title: 'Local Expertise',
-    desc: 'Deep Mumbai market knowledge to help you pick the right property at the right time.',
-    icon: ShieldCheck,
+    title: 'Proven Results',
+    desc: 'Our portfolio of 10+ successful projects demonstrates our ability to deliver exceptional outcomes consistently.',
   },
   {
-    title: 'Tailored Shortlists',
-    desc: 'Curated options based on your budget, location, lifestyle, and long‑term goals.',
-    icon: Gem,
+    title: 'Market Knowledge',
+    desc: 'Deep understanding of Mumbai, Thane, and Navi Mumbai markets ensures informed strategies.',
   },
   {
-    title: 'White‑glove Support',
-    desc: 'From site visits to paperwork, we stay with you—every step, every detail.',
-    icon: HeartHandshake,
+    title: 'Ethical Approach',
+    desc: 'We build long-term relationships through transparency, integrity, and honest dealings.',
   },
 ];
 
@@ -72,8 +69,7 @@ export default function About() {
                 <span className="text-primary italic">real estate</span>
               </h1>
               <p className="mt-6 max-w-3xl mx-auto text-sm md:text-base text-foreground/70 leading-relaxed">
-                For over a decade, we’ve helped clients buy, sell, and invest with confidence—through curated listings,
-                honest advice, and a truly premium end‑to‑end experience.
+              Delivering exclusive real estate project mandates backed by strategic insight, trusted developer partnerships, and a commitment to exceptional client experiences.
               </p>
             </div>
           </motion.div>
@@ -194,7 +190,7 @@ export default function About() {
                 <p className="text-foreground font-semibold">Deepak Tripathi</p>
                 <p className="text-xs text-muted-foreground">Founder & Director, Ananya Realty Advisory LLP</p>
                 <a
-                  href="https://www.linkedin.com/"
+                  href="https://www.linkedin.com/in/deepak-tripathi-083218180/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="mt-3 inline-flex items-center gap-2 text-xs text-muted-foreground hover:text-primary transition-colors"
@@ -210,8 +206,8 @@ export default function About() {
 
             <div className="lg:col-span-2 relative bg-obsidian-light border-t lg:border-t-0 lg:border-l border-border/40">
               <img
-                src={DIRECTOR_IMG}
-                alt="Director"
+                src={deepakPhoto}
+                alt="Deepak Tripathi, Founder & Director"
                 className="w-full h-full object-cover opacity-90"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-obsidian/80 via-obsidian/30 to-transparent" />
@@ -229,7 +225,7 @@ export default function About() {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
             <p className="text-xs text-muted-foreground uppercase tracking-widest">
-              Why Choose Ananya
+              Why Choose Ananya Realty Advisory LLP
             </p>
             <h2 className="mt-3 font-heading text-3xl md:text-4xl font-semibold text-foreground">
               Built for a <span className="text-primary italic">Premium</span> Experience
