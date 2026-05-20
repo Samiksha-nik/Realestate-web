@@ -1,15 +1,12 @@
-import { config as loadEnv } from 'dotenv';
-import { dirname, join } from 'path';
-import { fileURLToPath } from 'url';
-import express from 'express';
-import cors from 'cors';
-import multer from 'multer';
-import { isMailConfigured, sendFormEmails } from './mail.js';
+const path = require('path');
+const dotenv = require('dotenv');
+const express = require('express');
+const cors = require('cors');
+const multer = require('multer');
+const { isMailConfigured, sendFormEmails } = require('./mail');
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-// Prefer realestate-web/.env; also load repo-root .env (e.g. d:\Ananya-website\.env) so local overrides win
-loadEnv({ path: join(__dirname, '../../.env') });
-loadEnv({ path: join(__dirname, '../.env'), override: true });
+// Load .env from server folder (public_html/server/.env on MilesWeb)
+dotenv.config({ path: path.join(__dirname, '.env') });
 
 const app = express();
 const PORT = Number(process.env.PORT || 3001);
@@ -34,8 +31,20 @@ const upload = multer({
 app.use(cors({ origin: true }));
 app.use(express.json({ limit: '1mb' }));
 
+app.get('/', (_req, res) => {
+  res.json({
+    ok: true,
+    service: 'Ananya Realty mail API',
+    health: '/api/health',
+    mailConfigured: isMailConfigured(),
+  });
+});
+
 app.get('/api/health', (_req, res) => {
-  res.json({ ok: true, mailConfigured: isMailConfigured() });
+  res.json({
+    ok: true,
+    mailConfigured: isMailConfigured(),
+  });
 });
 
 app.post('/api/send-email', upload.single('resume'), async (req, res) => {
@@ -62,14 +71,21 @@ app.post('/api/send-email', upload.single('resume'), async (req, res) => {
       };
     }
 
-    await sendFormEmails({ formType, fields: fields || {}, userEmail, userName, attachment });
+    await sendFormEmails({
+      formType,
+      fields: fields || {},
+      userEmail,
+      userName,
+      attachment,
+    });
+
     res.json({ ok: true });
   } catch (error) {
     console.error('[send-email]', error);
 
     if (error.message === 'EMAIL_NOT_CONFIGURED') {
       return res.status(503).json({
-        error: 'Email is not configured. Add SMTP settings to .env (see .env.example).',
+        error: 'Email is not configured. Add SMTP settings to .env or Node app environment variables.',
       });
     }
     if (error.message === 'USER_EMAIL_REQUIRED') {
@@ -85,6 +101,12 @@ app.post('/api/send-email', upload.single('resume'), async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`[mail-api] http://localhost:${PORT} (configured: ${isMailConfigured()})`);
-});
+// MilesWeb / LiteSpeed Node loads this file with require() — must export the app
+module.exports = app;
+
+// Local dev only (npm start); cPanel Passenger binds the port itself
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`[mail-api] http://localhost:${PORT} (configured: ${isMailConfigured()})`);
+  });
+}
