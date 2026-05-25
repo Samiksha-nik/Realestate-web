@@ -65,47 +65,101 @@ function buildOwnerHtml({
   message,
   fields,
 }) {
+  // remove duplicate fields
+  const filteredFields = { ...fields };
+
+  delete filteredFields.Name;
+  delete filteredFields.Email;
+  delete filteredFields.Phone;
+  delete filteredFields.Message;
+  delete filteredFields['Contact No.'];
+  delete filteredFields['First Name'];
+  delete filteredFields['Last Name'];
+
   return `
-    <div style="font-family:Georgia,serif;max-width:560px;margin:0 auto;background:#111;color:#eee;padding:28px;border-radius:12px;">
-      <h2 style="color:#c9a227;">New ${formType}</h2>
+    <div style="
+      font-family: Georgia, serif;
+      max-width: 560px;
+      margin: 0 auto;
+      background: #111;
+      color: #eee;
+      padding: 28px;
+      border-radius: 12px;
+    ">
+      <h2 style="color:#c9a227;margin-bottom:24px;">
+        New ${formType}
+      </h2>
 
-      <table style="width:100%;">
+      <table style="
+        width:100%;
+        border-collapse:collapse;
+      ">
         <tr>
-          <td>Name</td>
-          <td>${fromName}</td>
+          <td style="padding:8px 12px 8px 0;color:#999;">
+            Name
+          </td>
+
+          <td style="padding:8px 0;">
+            ${fromName}
+          </td>
         </tr>
 
         <tr>
-          <td>Email</td>
-          <td>${replyEmail}</td>
+          <td style="padding:8px 12px 8px 0;color:#999;">
+            Email
+          </td>
+
+          <td style="padding:8px 0;">
+            ${replyEmail}
+          </td>
         </tr>
 
         <tr>
-          <td>Phone</td>
-          <td>${phone}</td>
+          <td style="padding:8px 12px 8px 0;color:#999;">
+            Phone
+          </td>
+
+          <td style="padding:8px 0;">
+            ${phone}
+          </td>
         </tr>
 
         <tr>
-          <td>Message</td>
-          <td>${message}</td>
+          <td style="padding:8px 12px 8px 0;color:#999;">
+            Message
+          </td>
+
+          <td style="padding:8px 0;">
+            ${message}
+          </td>
         </tr>
 
-        ${formatDetails(fields)}
+        ${formatDetails(filteredFields)}
       </table>
     </div>
   `;
 }
 
-function buildUserHtml({ formType, fromName }) {
+function buildUserHtml({ fromName }) {
   return `
     <div style="font-family:Georgia,serif;max-width:560px;margin:0 auto;background:#111;color:#eee;padding:28px;border-radius:12px;">
-      <h2 style="color:#c9a227;">
-        Thank you, ${fromName}
+      <h2 style="color:#c9a227;margin:0 0 20px;font-size:22px;font-weight:600;">
+        Thank you for reaching out
       </h2>
 
-      <p>
-        We have received your
-        <strong>${formType}</strong> enquiry.
+      <p style="line-height:1.7;margin:0 0 14px;font-size:15px;color:#eee;">
+        Dear ${fromName},
+      </p>
+
+      <p style="line-height:1.7;margin:0 0 14px;font-size:15px;color:#ddd;">
+        One of our team members will get in touch with you within the next 24 hours to assist you further.
+      </p>
+
+      <p style="line-height:1.6;margin:0;font-size:14px;color:#aaa;">
+        Regards,<br/>
+        ${SITE_NAME}<br/>
+        <a href="mailto:${getOwnerEmail()}" style="color:#c9a227;text-decoration:none;">${getOwnerEmail()}</a>
+        · ${CONTACT_PHONE}
       </p>
     </div>
   `;
@@ -173,7 +227,7 @@ async function sendFormEmails({
     from: getFromAddress(),
     to: replyEmail,
     subject: `Thank you for contacting ${SITE_NAME}`,
-    html: buildUserHtml({ formType, fromName }),
+    html: buildUserHtml({ fromName }),
   };
 
   const sameMailbox = replyEmail.trim().toLowerCase() === ownerEmail.trim().toLowerCase();
@@ -183,7 +237,7 @@ async function sendFormEmails({
       ...ownerMail,
       to: replyEmail,
       subject: `Thank you for contacting ${SITE_NAME} — ${formType} submission`,
-      html: `${buildUserHtml({ formType, fromName })}<hr style="border-color:#333;margin:24px 0"/>${buildOwnerHtml({
+      html: `${buildUserHtml({ fromName })}<hr style="border-color:#333;margin:24px 0"/>${buildOwnerHtml({
         formType,
         fromName,
         replyEmail,

@@ -6,7 +6,8 @@ const multer = require('multer');
 const { isMailConfigured, sendFormEmails } = require('./mail');
 
 // Load .env from server folder (public_html/server/.env on MilesWeb)
-dotenv.config({ path: path.join(__dirname, '.env') });
+// override: true — so a fresh .env wins over stale cPanel env vars after you rotate App Password
+dotenv.config({ path: path.join(__dirname, '.env'), override: true });
 
 const app = express();
 const PORT = Number(process.env.PORT || 3001);
@@ -93,6 +94,17 @@ app.post('/api/send-email', upload.single('resume'), async (req, res) => {
     }
     if (error.message === 'INVALID_FILE_TYPE') {
       return res.status(400).json({ error: 'Resume must be PDF, DOC, or DOCX.' });
+    }
+
+    const smtpAuthFailed =
+      error.code === 'EAUTH' ||
+      (error.message && /535|BadCredentials|Username and Password not accepted/i.test(error.message));
+
+    if (smtpAuthFailed) {
+      return res.status(503).json({
+        error:
+          'Email could not be sent: Gmail login failed. Update SMTP_PASS (new App Password) in server/.env, restart the Node app, and ensure SMTP_USER matches that Gmail account.',
+      });
     }
 
     res.status(500).json({
